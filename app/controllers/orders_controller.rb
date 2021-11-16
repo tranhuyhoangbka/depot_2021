@@ -28,8 +28,6 @@ class OrdersController < ApplicationController
     @order.add_line_items_from_cart(@cart)
     respond_to do |format|
       if @order.save
-        puts "==============="
-        puts pay_type_params.inspect
         Cart.destroy(session[:cart_id])
         session[:cart_id] = nil
         format.html { redirect_to store_index_url, notice: "Thank you for order." }

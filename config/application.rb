@@ -18,5 +18,7 @@ module Depot2021
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    # Not log credit card info
+    config.filter_parameters += [ :credit_card_number ]
   end
 end

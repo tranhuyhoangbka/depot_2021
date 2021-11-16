@@ -28,6 +28,8 @@ class OrdersController < ApplicationController
     @order.add_line_items_from_cart(@cart)
     respond_to do |format|
       if @order.save
+        puts "==============="
+        puts pay_type_params.inspect
         Cart.destroy(session[:cart_id])
         session[:cart_id] = nil
         format.html { redirect_to store_index_url, notice: "Thank you for order." }
@@ -70,6 +72,19 @@ class OrdersController < ApplicationController
     # Only allow a list of trusted parameters through.
     def order_params
       params.require(:order).permit(:name, :address, :email, :pay_type)
+    end
+
+    def pay_type_params
+      case order_params[:pay_type]
+      when 'Check'
+        params.require(:order).permit(:routing_number, :account_number)
+      when 'Credit card'
+        params.require(:order).permit(:credit_card_number, :expiration_date)
+      when 'Purchase order'
+        params.require(:order).permit(:po_number)
+      else
+        {}
+      end
     end
 
     def ensure_cart_isnt_empty

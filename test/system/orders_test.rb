@@ -1,6 +1,8 @@
 require "application_system_test_case"
 
 class OrdersTest < ApplicationSystemTestCase
+  include ActiveJob::TestHelper
+
   setup do
     @order = orders(:one)
   end
@@ -11,20 +13,35 @@ class OrdersTest < ApplicationSystemTestCase
   end
 
   test "creating a Order" do
+    LineItem.delete_all
+    Order.delete_all
     visit store_index_url
-    within "ul.catalog > li:first-child" do
-      click_on "Add to Cart"
-    end
 
+    click_on "Add to Cart", match: :first
     click_on "Checkout"
 
-    fill_in "Address", with: @order.address
-    fill_in "Email", with: @order.email
-    fill_in "Name", with: @order.name
+    fill_in "Address", with: "Fake address"
+    fill_in "Email", with: "user@example.com"
+    fill_in "Name", with: "fake_username"
     select "Check", from: 'Pay type'
-    click_on "Place Order"
-
-    assert_text "Thank you for order."
+    assert_selector "#order_routing_number"
+    fill_in "Routing #", with: 1111
+    fill_in "Account #", with: 2222
+    perform_enqueued_jobs do
+      click_button "Place Order"
+    end
+    orders = Order.all
+    assert_equal 1, orders.size
+    order = orders.first
+    assert_equal "fake_username", order.name
+    assert_equal "Fake address", order.address
+    assert_equal "user@example.com", order.email
+    assert_equal "Check", order.pay_type
+    assert_equal 1, order.line_items.size
+    mail = ActionMailer::Base.deliveries.last
+    assert_equal ["user@example.com"], mail.to
+    assert_equal "tranhuyhoang.bk.1992@gmail.com", mail[:from].value
+    assert_equal "Pragmatic Store Order Confirmation", mail.subject
   end
 
   test "updating a Order" do

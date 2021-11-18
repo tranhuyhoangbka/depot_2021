@@ -1,0 +1,3 @@
+I18n.translations || (I18n.translations = {});
+I18n.translations["en"] = I18n.extend((I18n.translations["en"] || {}), JSON.parse('{"javascript":{"account":"Account #","cc":"CC #","check":"Check","credit_card":"Credit Card","expire":"Expiry","pay_prompt":"Select a payment method","pay_type":"Pay type","po":"PO #","purchase_order":"Purchase order","routing":"Routing #"}}'));
+I18n.translations["es"] = I18n.extend((I18n.translations["es"] || {}), JSON.parse('{"javascript":{"account":"Account #","cc":"CC #","check":"Check","credit_card":"Credit Card","expire":"Expiry","pay_prompt":"Select a payment method","pay_type":"Pay type","po":"PO #","purchase_order":"Purchase order","routing":"Routing #"}}'));

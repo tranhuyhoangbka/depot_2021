@@ -1,17 +1,28 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Pragprog Books Online Store</title>
+    <title><%= t('.title') %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script type="text/javascript">
+      I18n.defaultLocale = "<%= I18n.default_locale %>";
+      I18n.locale = "<%= I18n.locale %>";
+    </script>
   </head>
 
   <body>
     <header class="main">
+      <aside>
+        <div class="locale">
+          <%= link_to 'English', {locale: :en} %> |
+          <%= link_to 'Spain', {locale: :es} %>
+        </div>
+      </aside>
+
       <%= image_tag 'logo.svg', alt: 'The book' %>
       <h1><%= @page_title %></h1>
     </header>
@@ -21,10 +32,10 @@
           <%= render_if @cart && @cart.line_items.any?, @cart %>
         </div>
         <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/questions">Questions</a></li>
-          <li><a href="/news">News</a></li>
-          <li><a href="/contact">Contact</a></li>
+          <li><a href="/"><%= t('.home') %></a></li>
+          <li><a href="/questions"><%= t('.questions') %></a></li>
+          <li><a href="/news"><%= t('.news') %></a></li>
+          <li><a href="/contact"><%= t('.contact') %></a></li>
         </ul>
 
         <% if session[:user_id] %>

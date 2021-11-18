@@ -22,5 +22,6 @@ module Depot2021
     config.filter_parameters += [ :credit_card_number ]
     # makes sure that the JavaScript copy of our translations is in sync with those in config/locales
     config.middleware.use I18n::JS::Middleware
+    config.hosts.clear
   end
 end

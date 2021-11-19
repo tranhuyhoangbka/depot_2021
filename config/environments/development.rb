@@ -75,13 +75,6 @@ Rails.application.configure do
   config.action_cable.disable_request_forgery_protection = true
 
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    address: "smtp.gmail.com",
-    port: 587,
-    authentication: "plain",
-    user_name: ENV['GMAIL_USER_NAME'],
-    password: ENV['GMAIL_PASSWORD'],
-    enable_starttls_auto: true
-  }
-  config.action_mailbox.ingress = :sendgrid
+  config.action_mailer.smtp_settings = {:address => '127.0.0.1', :port => 1025}
+  config.action_mailer.raise_delivery_errors = false
 end

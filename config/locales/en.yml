@@ -14,6 +14,8 @@ en:
       questions: 'Questions'
       news: 'News'
       contact: 'Contact'
+    simple:
+      title: "The Pragmatic Bookshelf"
   store:
     index:
       title_html: "Your Pragmatic Catalog"

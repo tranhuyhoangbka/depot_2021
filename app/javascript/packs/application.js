@@ -19,3 +19,8 @@ require("../../../public/javascripts/translations")
 
 require("trix")
 require("@rails/actiontext")
+import bootstrap from 'bootstrap'
+const images = require.context('../images', true)
+import 'components/bootstrap_form_validate'
+import 'components/modal_vary_content'
+import 'components/youtube_modal'

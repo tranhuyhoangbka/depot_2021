@@ -1,0 +1,16 @@
+.img-wrapper {
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  .col-2 {
+    height: 200px;
+    background-image: url('../images/dog1.jpeg');
+    background-repeat: no-repeat;
+  }
+}
+
+$breadcrumb-divider: quote(">");
+.custom-breadcrumb {
+
+
+}

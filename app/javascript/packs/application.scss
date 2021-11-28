@@ -1,4 +1,42 @@
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/utilities";
+
+$utilities: map-merge(
+  $utilities,
+  (
+    "cursor": (
+      property: cursor,
+      class: cursor,
+      responsive: true,
+      values: auto pointer grab,
+    )
+  )
+);
+
+$utilities: map-merge(
+  $utilities,
+  (
+    "width": map-merge(
+      map-get($utilities, "width"),
+      (
+        values: map-merge(
+          map-get(map-get($utilities, "width"), "values"),
+          (10: 10%),
+        ),
+      ),
+    ),
+  )
+);
+
+$breadcrumb-divider:  quote(">");
+$bootstrap-icons-font-src: url("~bootstrap-icons/font/fonts/bootstrap-icons.woff2?a74547b2f0863226942ff8ded57db345") format("woff2"),
+url("~bootstrap-icons/font/fonts/bootstrap-icons.woff?a74547b2f0863226942ff8ded57db345") format("woff") !default;
+
+@import "~bootstrap/scss/bootstrap";
+@import "bootstrap-icons/font/bootstrap-icons.scss";
 @import "css/actiontext.scss";
+@import "css/custom.scss";
 @import "css/sessions.scss";
 @import "css/users.scss";
 @import "css/scaffolds.scss";
@@ -8,6 +46,17 @@
 @import "css/orders.scss";
 @import "css/store.scss";
 @import "css/admin.scss";
+
+.custom-class {
+  display: none;
+}
+
+@include media-breakpoint-up(sm) {
+  .custom-class {
+    display: block;
+  }
+}
+
 
 body {
   margin: 0;
